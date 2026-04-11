@@ -1,0 +1,2 @@
+Create standard CRA public files if needed (index.html, favicon).
+For exam/demo, this project focuses on src code and API integration.
