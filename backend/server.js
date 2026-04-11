@@ -10,7 +10,6 @@ const MONGO_URI = 'mongodb://127.0.0.1:27017/pet-care-system';
 app.use(cors());
 app.use(express.json());
 
-// Simple format validators (backend safety check).
 const isValidVisitId = (visitId) => /^[A-Z]{3}-\d{4}$/.test(visitId);
 const isValidOwnerId = (ownerId) => /^OWN-\d{4}$/.test(ownerId);
 
@@ -18,7 +17,6 @@ const seedSampleData = async () => {
   const count = await Visit.countDocuments();
   if (count > 0) return;
 
-  // Sample records for testing search and update flows.
   await Visit.insertMany([
     {
       visitId: 'VIS-1001',
@@ -49,12 +47,11 @@ const seedSampleData = async () => {
   console.log('Sample visit data inserted.');
 };
 
-// Health endpoint (optional helper for quick checks).
+
 app.get('/health', (req, res) => {
   res.status(200).json({ message: 'Server is running' });
 });
 
-// POST /search: Find record by visitId + ownerId.
 app.post('/search', async (req, res) => {
   try {
     const { visitId, ownerId } = req.body;
@@ -80,7 +77,7 @@ app.post('/search', async (req, res) => {
   }
 });
 
-// PUT /update: Update only visitTime and serviceType, only if bookingStatus = CONFIRMED.
+
 app.put('/update', async (req, res) => {
   try {
     const { visitId, ownerId, visitTime, serviceType } = req.body;
@@ -105,7 +102,7 @@ app.put('/update', async (req, res) => {
       });
     }
 
-    // Restrict updates to allowed fields only.
+    
     if (typeof serviceType === 'string' && serviceType.trim()) {
       visit.serviceType = serviceType.trim();
     }

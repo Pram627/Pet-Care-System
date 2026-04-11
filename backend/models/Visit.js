@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Visit schema for pet care visit management.
 const visitSchema = new mongoose.Schema(
   {
     visitId: {

@@ -62,7 +62,6 @@ function VisitSearchPage() {
       setRecord(result.data);
       setUpdateData({
         serviceType: result.data.serviceType,
-        // Convert to datetime-local format.
         visitTime: new Date(result.data.visitTime).toISOString().slice(0, 16),
       });
       setMessage('Record found successfully.');
